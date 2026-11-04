@@ -1,6 +1,9 @@
 package tdd.roman;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -17,7 +20,7 @@ public class RomanNumeralsTest{
      */
 
 
-    @Test
+    /*@Test
     void shouldReturnIForOne(){
     assertThat(RomanNumerals.convert(1)).isEqualTo("I");
     }
@@ -85,12 +88,21 @@ public class RomanNumeralsTest{
     @Test
     void shouldReturnMCMXCIVfor1994(){
         assertThat(RomanNumerals.convert(1994)).isEqualTo("MCMXCIV");
+    }*/
+
+    @ParameterizedTest
+    @CsvSource({ "1,I", "2,II", "3,III", "4,IV", "5,V", "6,VI", "9,IX", "10,X", "14,XIV",
+            "40,XL", "49,XLIX", "50,L", "90,XC", "100,C", "400,CD", "500,D",
+            "900,CM", "1000,M", "1994,MCMXCIV", "3999,MMMCMXCIX"})
+    void shouldConvertToRoman(int i,String expected){
+        assertThat(RomanNumerals.convert(i)).isEqualTo(expected);
     }
 
 
-    @Test
-    void shouldRejectOutOfRange(){
-        assertThatThrownBy(()->RomanNumerals.convert(4000)).isInstanceOf(IllegalArgumentException.class);
+    @ParameterizedTest
+    @ValueSource(ints = {0,-1,4000,5000})
+    void shouldRejectOutOfRange(int i){
+        assertThatThrownBy(()->RomanNumerals.convert(i)).isInstanceOf(IllegalArgumentException.class);
     }
 }
 
