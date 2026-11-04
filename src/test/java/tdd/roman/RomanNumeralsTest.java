@@ -58,5 +58,39 @@ public class RomanNumeralsTest{
     void shouldReturnXForTen(){
         assertThat(RomanNumerals.convert(10)).isEqualTo("X");
     }
+
+    // Nouveau Cycle !
+    @Test
+    void shouldReturnXLForForty(){
+        assertThat(RomanNumerals.convert(40)).isEqualTo("XL");
+    }
+
+    @Test
+    void shouldReturnLForFifty(){
+        assertThat(RomanNumerals.convert(50)).isEqualTo("L");
+    }
+
+
+    @Test
+    void shouldReturnCForHundred(){
+        assertThat(RomanNumerals.convert(100)).isEqualTo("C");
+    }
+
+    @Test
+    void shouldReturnXLIXForFortyNine(){
+        assertThat(RomanNumerals.convert(49)).isEqualTo("XLIX");
+    }
+
+
+    @Test
+    void shouldReturnMCMXCIVfor1994(){
+        assertThat(RomanNumerals.convert(1994)).isEqualTo("MCMXCIV");
+    }
+
+
+    @Test
+    void shouldRejectOutOfRange(){
+        assertThatThrownBy(()->RomanNumerals.convert(4000)).isInstanceOf(IllegalArgumentException.class);
+    }
 }
 
